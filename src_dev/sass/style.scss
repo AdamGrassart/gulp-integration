@@ -1,0 +1,18 @@
+@import "modules/sprites/sprite";
+
+#apple{
+	@include sprite($apple_ex);
+}
+
+#madiv{
+	color:blue;
+	&-blue{
+		color:green;
+		border-radius: 5px;
+	}
+}
+
+#nouvelle_div{
+	color:green;
+	color: blue;
+}
