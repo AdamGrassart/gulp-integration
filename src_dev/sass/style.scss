@@ -1,18 +1,45 @@
+/*------------------------------------*\
+    $CONTENU
+\*------------------------------------*/
+/**
+ * BASE................Règles de base
+ * LAYOUT..............Les différents gabarits
+ * SPRITES.............Les sprites pour mobils ensuite desktop
+ * MODULES.............(special_form, browser-fix, element)
+ */
+
+
+
+
+/*------------------------------------*\
+    $BASE
+\*------------------------------------*/
+@import "base/normalize";
+@import "base/base";
+@import "base/grid";
+@import "base/form";
+
+
+/*------------------------------------*\
+    $LAYOUT
+\*------------------------------------*/
+@import "layout/header";
+@import "layout/nav";
+@import "layout/main";
+@import "layout/footer";
+
+
+/*------------------------------------*\
+    $SPRITES
+\*------------------------------------*/
 @import "modules/sprites/sprite";
+@import "modules/sprites/spritefull";
 
-#apple{
-	@include sprite($apple_ex);
-}
 
-#madiv{
-	color:blue;
-	&-blue{
-		color:green;
-		border-radius: 5px;
-	}
-}
+/*------------------------------------*\
+    $MODULES
+\*------------------------------------*/
+@import "modules/table";
+@import "modules/form-search";
+@import "modules/video";
 
-#nouvelle_div{
-	color:green;
-	color: blue;
-}
