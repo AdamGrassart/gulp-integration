@@ -2,3 +2,267 @@
    GRID
    ================================ */
 
+/*
+ * debug => display grid and status
+ * true or false
+*/
+$debug: true;
+
+/*
+ * type of container
+ * $container:elastic => 100% width screen
+ * $container:solid   => px width < screen
+*/
+$container: solid;
+$enable-xl : false;
+
+/*
+ * breakpoints
+ * for differents device width
+ * xs < sm < md < lg
+*/
+$breakpoints-sm:768px;
+$breakpoints-md:992px;
+$breakpoints-lg:1200px;
+$breakpoints-xl:1600px;
+
+
+/*
+ * Number of columns division width
+*/
+$columns: 12;
+
+/*
+ * margin between each columns (%) 
+*/
+$gutter:0.5%; // (%)
+
+/*
+ * Container style
+*/
+.container{
+    @if $debug == true {
+        background: ghostwhite
+        }
+    display:block;
+    width:100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+/*
+ * row style
+*/
+.row{
+    display:block;
+    width:100%;
+    overflow: hidden;
+    margin: 5px 0;
+}
+
+
+/*
+ * Style general des columns
+*/
+
+.col{
+    @if $debug == true {
+        background: lavender;
+        border-radius: 2px;
+        }
+    display:block;
+    float:left;
+    margin:0 $gutter;
+}
+
+
+/*
+ * columns XS
+ * grid-[1..Columns]
+*/
+@for $i from 1 through $columns{
+    .xs-#{$i}{
+            @extend .col;
+            width:($i/$columns*100) - ($gutter*2);            
+        }
+    .sm-#{$i}, .md-#{$i}, .lg-#{$i} {
+        @extend .col;
+    }
+}
+
+
+/*
+ * responsive hidden rules
+*/
+.xs-hide{display:none;}
+
+/* 
+ * ========================================== 
+ * ======= breakpoint : SMALL =============== 
+ * ==========================================
+*/
+@media only screen and(min-width: $breakpoints-sm){
+
+/*
+* Container style 
+*/
+.container{
+    @if $container == 'elastic'{
+     width: 100%;  
+    }@else{
+     width:$breakpoints-sm;
+    }  
+}  
+    
+    /*
+    * columns SM
+    * grid-[1..Columns]
+    */
+    @for $i from 1 through $columns{
+    .sm-#{$i}{
+        width:($i/$columns*100) - ($gutter*2); 
+    } 
+    }
+
+/*
+ * responsive hidden rules
+*/
+.sm-hide{display:none;}
+.sm-display{display:block;}
+
+}
+
+/* 
+ * ========================================== 
+ * ======= breakpoint : MEDIUM ============== 
+ * ==========================================
+*/
+   
+
+       
+
+
+@media only screen and(min-width: $breakpoints-md){
+    
+/*
+ * Container style 
+*/
+.container{
+    @if $container == 'elastic'{
+     width: 100%;  
+    }@else{
+     width:$breakpoints-md;
+    }  
+}
+
+
+/*
+ * columns MD
+ * grid-[1..Columns]
+*/   
+@for $i from 1 through $columns{
+    .md-#{$i}{
+        width:($i/$columns*100) - ($gutter*2); 
+    }
+}
+
+/*
+ * responsive hidden rules
+*/
+.md-hide{display:none;}
+.md-display{display:block;}
+
+
+}
+
+
+/* 
+ * ========================================== 
+ * ======= breakpoint : LARGE =============== 
+ * ==========================================
+*/
+   
+   
+
+
+
+@media only screen and(min-width: $breakpoints-lg){
+    
+/*
+ * Container style 
+*/
+.container{
+    @if $container == 'elastic'{
+     width: 100%;  
+    }@else{
+     width:$breakpoints-lg;
+    }  
+}
+
+
+/*
+ * columns LG
+ * grid-[1..Columns]
+*/
+@for $i from 1 through $columns{
+    .lg-#{$i}{
+        width:($i/$columns*100) - ($gutter*2); 
+    }
+} 
+
+/*
+ * responsive hidden rules
+*/
+.lg-hide{display:none;}
+.lg-display{display:block;}
+
+}
+
+
+
+
+@if $enable-xl == true{
+    
+    
+    /* 
+    * ========================================== 
+    * ======= breakpoint : EXTRA LARGE ========= 
+    * ==========================================
+    */
+
+    @media only screen and(min-width: $breakpoints-xl){
+    
+/*
+ * Container style 
+*/
+.container{
+    @if $container == 'elastic'{
+     width: 100%;  
+    }@else{
+     width:$breakpoints-xl;
+    }  
+}
+
+
+/*
+ * columns LG
+ * grid-[1..Columns]
+*/
+@for $i from 1 through $columns{
+    .xl-#{$i}{
+        width:($i/$columns*100) - ($gutter*2); 
+    }
+} 
+
+/*
+ * responsive hidden rules
+*/
+.xl-hide{display:none;}
+.xl-display{display:block;}
+
+}
+}
+
+
+   
+  
