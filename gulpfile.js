@@ -17,8 +17,6 @@ spritesmith = require('gulp.spritesmith'),
 // BrowserSync
 browserSync = require('browser-sync').create();
 
-var merge = require('merge-stream');
-
 
 // ENVIRONEMENT
 /* --------------------
