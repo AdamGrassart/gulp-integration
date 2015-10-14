@@ -108,7 +108,7 @@ gulp.task('browser-proxy', function() {
 
 //change
 gulp.task('browser-onchange', function(){
-  gulp.watch('*.html').on('change', browserSync.reload);
+  gulp.watch('*.*').on('change', browserSync.reload);
 });
 
 
