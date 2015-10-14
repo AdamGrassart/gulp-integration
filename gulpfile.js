@@ -17,59 +17,59 @@ spritesmith = require('gulp.spritesmith'),
 // BrowserSync
 browserSync = require('browser-sync').create();
 
+var merge = require('merge-stream');
 
 
-
-// ENVIRONEMENT 
+// ENVIRONEMENT
 /* --------------------
 ---------------------- */
 
 var base_dir = 'src_dev/';
 
 var path = {
-  
+
   // JAVASCRIPT --------------------------
   js                  : base_dir + 'js/*.js',
-  
-  
+
+
   // SASS --------------------------------
   sassWatch           : base_dir + 'sass/**/*.scss',
   sass                : base_dir + 'sass/style.scss',
-  
-  
+
+
   // IMAGE  ------------------------------
   image               : base_dir + 'images/*.*',
-  
-  
+
+
   // SPRITES  ----------------------------
   sprite              : base_dir + 'sprites/sprites/*.png',
   spriteTemplate      : base_dir + 'sass/config/_sprites.scss.handlebars',
-  
+
   spritefull          : base_dir + 'sprites/spritesfull/*.png',
   spritefullTemplate  : base_dir + 'sass/config/_spritesfull.scss.handlebars',
 };
 
 var output = {
-  
+
   // JAVASCRIPT --------------------------
   jsName            : 'main.min.js',
   jsFolder          : 'js',
-  
-  
+
+
   // SASS --------------------------------
   sass              : '.', // style.css to racine
 
 
   // IMAGE  ------------------------------
   image             : 'images',
-  
+
 
   // SPRITES  ----------------------------
   spriteFolder      : 'sprites',
-  
+
   spriteName        : 'sprite.png',
   spriteCssName     : '../src_dev/sass/modules/sprites/_sprite.scss',
-  
+
   spritefullName    : 'spritefull.png',
   spritefullCssName : '../src_dev/sass/modules/sprites/_spritefull.scss',
 }
@@ -83,7 +83,7 @@ Utilisation en direct de tous les modules
 
   // ---    Start server
   gulp.task('serve', ['browser-serve','watch-js', 'watch-sass', 'watch-sprite','watch-spritefull', 'browser-onchange']);
-  
+
   // ---    Start proxy + watch js/sass + browzer sync ------
   gulp.task('proxy', ['browser-proxy','watch-js', 'watch-sass', 'watch-sprite','watch-spritefull', 'browser-onchange']);
 
@@ -114,13 +114,13 @@ gulp.task('browser-onchange', function(){
 });
 
 
-// JS optimisation 
+// JS optimisation
 /* --------------------
-Concaténation et uglify les fichiers js à chaque 
+Concaténation et uglify les fichiers js à chaque
 modification
 
 => watch-js : Ecoute et opimise à chaque modification.
-=> js : Optimise une seul fois à la demande. 
+=> js : Optimise une seul fois à la demande.
 ---------------------- */
 
 gulp.task('watch-js', function(){
@@ -137,13 +137,13 @@ gulp.task('js', function() {
 
 
 
-// SCSS : Traitement et Optimisation 
+// SCSS : Traitement et Optimisation
 /* --------------------
-Conversion, Concaténation et préfixage des fichiers scss en css à chaque 
+Conversion, Concaténation et préfixage des fichiers scss en css à chaque
 modification
 
 => watch-sass : Ecoute et opimise à chaque modification.
-=> sass : Optimise une seul fois à la demande. 
+=> sass : Optimise une seul fois à la demande.
 ---------------------- */
 
 gulp.task('watch-sass', function(){
@@ -159,13 +159,13 @@ gulp.task('sass', function() {
 
 
 
-// Images : Traitement et Optimisation 
+// Images : Traitement et Optimisation
 /* --------------------
-Conversion, Concaténation et préfixage des fichiers scss en css à chaque 
+Conversion, Concaténation et préfixage des fichiers scss en css à chaque
 modification
 
 => watch-sass : Ecoute et opimise à chaque modification.
-=> sass : Optimise une seul fois à la demande. 
+=> sass : Optimise une seul fois à la demande.
 ---------------------- */
 
 gulp.task('watch-image', function(){
@@ -182,12 +182,12 @@ gulp.task('image', function () {
 
 
 
-// Sprites : Traitement et Optimisation 
+// Sprites : Traitement et Optimisation
 /* --------------------
 Création de sprites à partir d'une librairie d'images
 
 => watch-sprite / watch-spritefull : Ecoute et opimise à chaque modification des dossier.
-=> sprite, spritefull : Optimise une seul fois à la demande. 
+=> sprite, spritefull : Optimise une seul fois à la demande.
 ---------------------- */
 
 gulp.task('watch-sprite', function(){
@@ -199,13 +199,12 @@ gulp.task('sprite', function () {
     imgName: output.spriteName ,
     cssName: output.spriteCssName,
     cssTemplate: path.spriteTemplate,
+    imgPath : 'sprites/sprite.png',
   }));
-  
-  var imageStream = spriteData.img
-      .pipe(imagemin())
-      .pipe(gulp.dest('sprites'));
 
-  return imageStream;
+
+  return spriteData.pipe(gulp.dest(output.spriteFolder));
+
 });
 
 
@@ -219,11 +218,8 @@ gulp.task('spritefull', function () {
     imgName: output.spritefullName,
     cssName: output.spritefullCssName,
     cssTemplate: path.spritefullTemplate,
+    imgPath : 'sprites/spritefull.png',
   }));
 
-    var imageStream = spriteData.img
-      .pipe(imagemin())
-      .pipe(gulp.dest( output.spriteFolder ));
-
-  return imageStream;
+  return spriteData.pipe(gulp.dest(output.spriteFolder));
 });
