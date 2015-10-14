@@ -1,0 +1,12 @@
+node_modules/*
+
+sprites/*
+images/*
+
+src_dev/images/*
+src_dev/js/*
+src_dev/sprites/sprites/*
+src_dev/sprites/spritesfull/*
+
+src_dev/sass/modules/sprites/*
+src_dev/sass/modules/spritesfull/*
